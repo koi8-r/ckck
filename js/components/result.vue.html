@@ -1,0 +1,84 @@
+<!-- <div class='container-fluid'> -->
+<div class='row'><div class='col'>
+    <div class='row justify-content-center text-center'>
+        <div class='col'><b>{{ doc.org_name }}</b></div>
+    </div>
+    <div class='row justify-content-center text-center'>
+        <div class='col'><b>ИНН {{ doc.org_inn }}</b></div>
+    </div>
+    <div class='row justify-content-center text-center'>
+        <div class='col'>Кассовый чек № {{ doc.request_num }}</div>
+    </div>
+    <div class='row justify-content-center'>
+        <div class='col text-left'>Кассир</div>
+        <div class='col text-right'>{{ doc.operator }}</div>
+    </div>
+    <div class='row justify-content-center'>
+        <div class='col text-left'>№ смены</div>
+        <div class='col text-right'>{{ doc.session_num }}</div>
+    </div>
+    <div class='row justify-content-center'>
+        <div class='col text-left'>Система н/о</div>
+        <div class='col text-right'>{{ tax_type_str }}</div>
+    </div>
+    <div class='row justify-content-center'>
+        <div class='col text-left'>{{ op_str }}</div>
+        <div class='col text-right'>{{ doc.date_time }}</div>
+    </div>
+
+    <div class='row justify-content-center'>
+        <div class='col text-left'>Рег.№ ККТ</div>
+        <div class='col text-right'>{{ doc.reg_num }}</div>
+    </div>
+    <div class='row justify-content-center'>
+        <div class='col text-left'>Зав.№ ФН</div>
+        <div class='col text-right'>{{ doc.dev_num }}</div>
+    </div>
+    <div class='row justify-content-center'>
+        <div class='col text-left'>№ ФД</div>
+        <div class='col text-right'>{{ doc.doc_num }}</div>
+    </div>
+    <div class='row justify-content-center'>
+        <div class='col text-left'>ФПД</div>
+        <div class='col text-right'>{{ doc.sign }}</div>
+    </div>
+
+    <div class='row justify-content-center'>
+        <div class='col text-left'>Итого</div>
+        <div class='col text-right blue'> = {{ doc.sum / 100 }}</div>
+    </div>
+    <div class='row justify-content-center'>
+        <div class='col text-left'>Итог НДС 18%</div>
+        <div class='col text-right blue'> = {{ doc.nds_18 / 100 }}</div>
+    </div>
+    <div class='row justify-content-center'>
+        <div class='col text-left'>Итог НДС 10%</div>
+        <div class='col text-right blue'> = {{ doc.nds_10 / 100 }}</div>
+    </div>
+    <div class='row justify-content-center'>
+        <div class='col text-left'>Наличными</div>
+        <div class='col text-right blue'> = {{ doc.cash / 100 }}</div>
+    </div>
+    <div class='row justify-content-center'>
+        <div class='col text-left'>Электронными</div>
+        <div class='col text-right blue'> = {{ doc.ecash / 100 }}</div>
+    </div>
+
+    <template v-for='(g, i) in doc.goods'>
+        <div class='row justify-content-center text-center'>
+            <div class='col'><small><b>{{ g.name }}</b></small></div>
+        </div>
+        <div class='row justify-content-center'>
+            <div class='col text-right blue'>{{ g.size }} x {{ g.price / 100 }} = {{ g.sum / 100 }}</div>
+        </div>
+        <div class='row justify-content-center'>
+            <div class='col'><small>НДС 18%</small></div>
+            <div class='col text-right blue'> = {{ g.nds_18 / 100}}</div>
+        </div>
+        <div class='row justify-content-center'>
+            <div class='col'><small>НДС 10%</small></div>
+            <div class='col text-right blue'> = {{ g.nds_10 / 100}}</div>
+        </div>
+    </template>
+</div></div>
+<!-- </div> -->

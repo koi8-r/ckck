@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<!--suppress ALL -->
+<html lang="ru">
+    <head>
+        <meta charset="utf-8">
+        <title>Запрос чеков из налоговой</title>
+        <!-- <link rel="stylesheet" href="css/main.css"> -->
+        <meta name='viewport' content='width=device-width, initial-scale=1'>
+    </head>
+    <body>
+        <div id='app'>
+            <div class='container-fluid'>
+                <div class='row justify-content-center mb-5 s-color'>
+                    <div class='col-4 text-center p-3'>
+                        <error-component v-bind:err='error_str'></error-component>
+                    </div>
+                </div>
+
+                <div class='row form-group justify-content-center'>
+                    <label for='dev_num' class='col-2 col-md-1 col-form-label text-right'>ФН</label>
+                    <div class='col-10 col-md-3'>
+                        <input class='form-control' type='text' id='dev_num' v-model='dev_num' placeholder='ФН'
+                               v-bind:class='{"is-valid": dev_num_input_ok, "is-invalid": !dev_num_input_ok}'>
+                    </div>
+                </div>
+                <div class='row form-group justify-content-center'>
+                    <label for='doc_num' class='col-2 col-md-1 col-form-label text-right'>ФД</label>
+                    <div class='col-10 col-md-3'>
+                        <input class='form-control' type='text' id='doc_num' v-model='doc_num' placeholder='ФД'
+                               v-bind:class='{"is-valid": doc_num_input_ok, "is-invalid": !doc_num_input_ok}'>
+                    </div>
+                </div>
+                <div class='row form-group justify-content-center'>
+                    <label for='sign' class='col-2 col-md-1 col-form-label text-right'>ФПД</label>
+                    <div class='col-10 col-md-3'>
+                        <input class='form-control' type='text' id='sign' v-model='sign' placeholder='ФПД'
+                               v-bind:class='{"is-valid": sign_input_ok, "is-invalid": !sign_input_ok}'>
+                    </div>
+                </div>
+                <div class='row form-group justify-content-center'>
+                    <div class='col-12 col-md-4 text-center'>
+                        <button class='btn btn-primary btn-md' v-on:click='query'>Запрос</button>
+                        <button class="btn btn-danger btn-md"  v-on:click='clr'>Очистить</button>
+                        <button class="btn btn-warning btn-md" v-on:click='fill_test_data'>тест</button>
+                    </div>
+                </div>
+
+                <div v-if='data !== undefined' class='row justify-content-center'>
+                    <div class='col-12 col-sm-10 col-md-8 col-lg-6 col-xl-4 w-color p-2 p-lg-5'>
+                        <result-component v-bind:doc='data'></result-component>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src='js/app.js'></script>
+    </body>
+</html>

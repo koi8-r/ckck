@@ -1,0 +1,36 @@
+{
+    "name": "ckck",
+    "version": "0.0.1",
+    "description": "ckck",
+    "main": "index.js",
+    "scripts": {
+        "build": "webpack"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/koi8-r/ckck.git"
+    },
+    "author": "koi8-r <me@oz.net.ru> (http://oz.net.ru/)",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/koi8-r/ckck/issues"
+    },
+    "dependencies": {
+        "vue" : "^2.4.0",
+        "axios": "*",
+        "lodash": "*",
+        "bootstrap": "^4.0.0-beta"
+    },
+    "devDependencies": {
+        "webpack": "^3.6.0",
+        "clean-webpack-plugin": "*",
+        "copy-webpack-plugin": "*",
+        "raw-loader": "*",
+        "style-loader" : "*",
+        "css-loader" : "*",
+        "babel-core": "*",
+        "babel-loader": "*",
+        "babel-preset-env": "*"
+    },
+    "homepage": "https://github.com/koi8-r/ckck#readme"
+}
