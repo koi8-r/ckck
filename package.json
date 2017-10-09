@@ -29,6 +29,7 @@
         "raw-loader": "*",
         "style-loader" : "*",
         "css-loader" : "*",
+        "file-loader": "^1.1.5",
         "babel-core": "*",
         "babel-loader": "*",
         "babel-preset-env": "*"

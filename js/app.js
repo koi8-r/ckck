@@ -1,5 +1,5 @@
 'use strict' ;
-require('bootstrap/dist/css/bootstrap.min.css') ;
+require('bootstrap/dist/css/bootstrap.css') ;
 require('../css/app.css') ;
 import Vue from 'vue' ;
 import ErrorComponent from './components/error.js' ;

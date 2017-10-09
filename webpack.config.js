@@ -73,6 +73,26 @@ module.exports = {
                         plugins: []
                     }
                 }
+            },
+            {
+                test: /\.(png|jpeg)$/,
+                use: {
+                    loader: 'file-loader',
+                    options: {
+                        name: '[path][name].[ext]',
+                        outputPath: 'assets/'
+                    }
+                }
+            },
+            {
+                test: /\.(eot|woff2?|ttf|svg)(\?(#\w+&)?v=\d+\.\d+\.\d+(#\w+)?)?$/,
+                use: {
+                    loader: 'file-loader',
+                    options: {
+                        name: '[name].[ext]',
+                        outputPath: 'fonts/'
+                    }
+                }
             }
         ]
     }
