@@ -1,11 +1,13 @@
 'use strict' ;
 
-
 const webpack = require('webpack') ;
 const path = require('path') ;
 const CopyWebpackPlugin = require('copy-webpack-plugin') ;
 const CleanWebpackPlugin = require('clean-webpack-plugin') ;
+const ExtractTextPlugin = require('extract-text-webpack-plugin') ;
 
+
+const dist = path.resolve( __dirname, 'dist' ) ;
 
 module.exports = {
     entry: {
@@ -13,22 +15,22 @@ module.exports = {
         'test': "./js/test"
     },
     output: {
-        path: path.resolve( __dirname, 'dist', 'js' ),
-        filename: "[name].js"
+        path: dist,
+        filename: "js/[name].js"
     },
     resolve: {
         alias: { vue: 'vue/dist/vue.min.js' }  // this runtime include template compiler, esm by default
     },
     plugins: [
-        new CleanWebpackPlugin(['dist']),
+        new CleanWebpackPlugin([dist]),
         new CopyWebpackPlugin([
             {
                 from: '*.html',
-                to: '..'
+                to: '.'
             },
             // {
             //     from: 'css/*',
-            //     to: '..'
+            //     to: '.'
             // }
         ]),
         new webpack.ProvidePlugin({
@@ -40,7 +42,7 @@ module.exports = {
             'window.jQuery': 'jquery',
             Popper: ['popper.js', 'default'] // default export of an popper es2015 module
         }),
-        // new ExtractTextPlugin('bundle.css')
+        new ExtractTextPlugin('css/[name].css')
     ],
     module: {
         rules: [
@@ -52,11 +54,14 @@ module.exports = {
             },
             {
                 test: /\.css$/,
-                // loader: ExtractTextPlugin.extract('style-loader', 'css-loader')
-                use: [
-                    { loader: 'style-loader' },
-                    { loader: 'css-loader' }
-                ]
+                use: ExtractTextPlugin.extract({
+                    fallback: 'style-loader',
+                    use: 'css-loader'
+                }),
+                //use: [
+                //    { loader: 'style-loader' },
+                //    { loader: 'css-loader' }
+                //]
             },
             {
                 test: /\.js$/,

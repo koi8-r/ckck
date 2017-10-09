@@ -25,6 +25,7 @@
         "webpack": "^3.6.0",
         "clean-webpack-plugin": "*",
         "copy-webpack-plugin": "*",
+        "extract-text-webpack-plugin": "*",
         "raw-loader": "*",
         "style-loader" : "*",
         "css-loader" : "*",
