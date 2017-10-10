@@ -85,12 +85,13 @@ module.exports = {
                 }
             },
             {
-                test: /\.(eot|woff2?|ttf|svg)(\?(#\w+&)?v=\d+\.\d+\.\d+(#\w+)?)?$/,
+                test: /.*\.(eot|woff2?|ttf|svg)(\?(#\w+&)?v=\d+\.\d+\.\d+(#\w+)?)?$/,
                 use: {
                     loader: 'file-loader',
                     options: {
                         name: '[name].[ext]',
-                        outputPath: 'fonts/'
+                        outputPath: 'fonts/',
+                        publicPath: '../'
                     }
                 }
             }
