@@ -61,8 +61,14 @@ const app = new Vue({
                 }
             })
             .then(resp => {
-                this.data = resp.data ;
-                this.error_str = 'Нет ошибки'
+                if(resp.status === 202) {
+                    console.info('Server return 202 code, resend request') ;
+                    this.error_str = 'Запрос принят' ;
+                    this.$nextTick(function() { this.query() })  // or es6 Promise chain ?
+                } else {
+                    this.data = resp.data;
+                    this.error_str = 'Нет ошибки'
+                }
             })
             .catch(e => {
                 console.error(e.response.status + ': ' + e.response.statusText) ;
