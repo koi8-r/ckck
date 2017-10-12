@@ -49,37 +49,43 @@ const app = new Vue({
         query: function() {
             this.data = undefined ;
             this.error_str = 'Отправка запроса' ;
+            let qs_p = {
+                sign:    this.sign,
+                dev_num: this.dev_num,
+                doc_num: this.doc_num
+            } ;
+            let hdr_p = {
+                'X-Requested-With': 'XMLHttpRequest',
+            } ;
 
-            this.$http.get('/api/', {
-                params: {
-                    sign:    this.sign,
-                    dev_num: this.dev_num,
-                    doc_num: this.doc_num
-                },
-                headers: {
-                    'X-Requested-With': 'XMLHttpRequest',
-                }
-            })
-            .then(resp => {
-                if(resp.status === 202) {
-                    console.info('Server return 202 code, resend request') ;
-                    this.error_str = 'Запрос принят' ;
-                    this.$nextTick(function() { this.query() })  // or es6 Promise chain ?
-                } else {
-                    this.data = resp.data;
-                    this.error_str = 'Нет ошибки'
-                }
-            })
-            .catch(e => {
-                console.error(e.response.status + ': ' + e.response.statusText) ;
+            let _fn = () => {
+                return this.$http.get('/api/', { params: qs_p, headers: hdr_p })
+                       .then( resp => {
+                           if(resp.status === 202) {
+                               console.debug('Server return 202 code, resend request') ;
+                               return _fn() ;
+                           } else
+                               return resp
+                       })
+                       .catch( err => {
+                           throw err
+                       })
+            } ;
 
-                if (e.response.status === 400)
-                    this.error_str = 'Ошибка в запросе' ;
-                else if (e.response.status === 404)
-                    this.error_str = 'Не найдено' ;
-                else
-                    this.error_str = 'Ошибка: ' + e.response.statusText ;
-            }) ;
+            _fn().then( resp => {
+                    console.info(`Successful request[${resp.status}]: ${resp.statusText}`) ;
+                    this.data = resp.data ;
+                    this.error_str = 'Нет ошибки' ;
+                })
+                .catch( e => {
+                    console.error(`Failed request[${e.response.status}]: ${e.response.statusText}`) ;
+                    if (e.response.status === 400)
+                        this.error_str = 'Ошибка в запросе' ;
+                    else if (e.response.status === 404)
+                        this.error_str = 'Не найдено' ;
+                    else
+                        this.error_str = `Ошибка: ${e.response.statusText}` ;
+                }) ;
         }
     },
     components: {
