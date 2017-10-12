@@ -60,3 +60,9 @@ body {
 .fa-trash-o:before {
   content: "\f014" ;
 }
+
+.fa-save:before,
+.fa-floppy-o:before {
+  content: "\f0c7";
+}
+
