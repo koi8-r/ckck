@@ -46,6 +46,9 @@ const app = new Vue({
             this.dev_num = this.doc_num = this.sign = '' ;
             this.error_str = 'Нет ошибки'
         },
+        save: function () {
+            console.warn('Not implemented')
+        },
         query: function() {
             this.data = undefined ;
             this.error_str = 'Отправка запроса' ;
