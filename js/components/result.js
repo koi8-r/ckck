@@ -15,8 +15,8 @@ export default Vue.extend({
             switch(this.doc.op_type) {
                 case 1: return 'Приход' ;
                 case 2: return 'Возврат прихода' ;
-                // case 3: return 'Расход' ;
-                // case 4: return 'Возврат расхода' ;
+                case 3: return 'Расход' ;
+                case 4: return 'Возврат расхода' ;
                 default: return 'Неизвестно' ;
             }
         },
